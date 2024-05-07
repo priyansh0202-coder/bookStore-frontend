@@ -10,8 +10,6 @@ const cartSlice = createSlice({
             state.cart.push(action.payload);
         },
         removeFromCart: (state, action) => {
-            console.log("cccc", state.cart.cart)
-            console.log("cccc", action.payload)
             state.cart = action.payload;
         }
     }
