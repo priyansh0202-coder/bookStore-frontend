@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Button, AppBar, Toolbar, IconButton, Badge, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart } from '../redux/cartSlice';
+import { addtoCart, removeFromCart } from '../redux/cartSlice';
 
 
 const Cart = () => {
@@ -47,7 +47,7 @@ const Cart = () => {
                 <h1>Your Cart</h1>
                 {cartItems.length === 0 ? (
                     <Typography variant="body1">
-                        Your cart is empty.
+                        Your cart is empty
                     </Typography>
                 ) : (
                     <Grid container spacing={2} justifyContent="center">
@@ -75,8 +75,15 @@ const Cart = () => {
                 <Typography variant='h6' component='div' style={{ marginTop: 16 }}>
                     Total Price: ${calculateTotalPrice()}
                 </Typography>
-                <Button variant='contained' color='primary' style={{ marginTop: 16 }}>
-                    Checkout
+                <Button variant='contained' color='primary' style={{ marginTop: 16 }} onClick={(item) => dispatch(addtoCart({
+                    cover: item.cover,
+                    title: item.title,
+                    desc: item.desc,
+                    price: item.price,
+                }))}>
+                    <Link to='/checkout' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        Checkout
+                    </Link>
                 </Button>
             </div>
         </div>

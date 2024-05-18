@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Card, CardContent, Typography, Button, AppBar, Toolbar, IconButton, Badge, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Button, AppBar, Toolbar, IconButton, Badge, Grid, TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addtoCart } from '../redux/cartSlice';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 const Books = () => {
     const [books, setBooks] = useState([]);
+    const [filteredBooks, setFilteredBooks] = useState([]);
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.cart);
 
@@ -15,12 +18,26 @@ const Books = () => {
             try {
                 const response = await axios.get('http://localhost:8000/book');
                 setBooks(response.data);
+                setFilteredBooks(response.data);
             } catch (error) {
                 console.log(error);
             }
         };
         fetchAllBooks();
     }, []);
+
+    const handleSearch = () => {
+        if (searchVal === "") {
+            setFilteredBooks(books);
+        } else {
+            const filterBySearch = books.filter((item) =>
+                item.title.toLowerCase().includes(searchVal.toLowerCase())
+            );
+            setFilteredBooks(filterBySearch);
+        }
+    };
+
+    const [searchVal, setSearchVal] = useState("");
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: " black" }}>
@@ -31,6 +48,20 @@ const Books = () => {
                             Books Store
                         </Typography>
                     </Link>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <TextField
+                            type='search'
+                            value={searchVal}
+                            onChange={(e) => setSearchVal(e.target.value)}
+                            placeholder="Search books..."
+                            variant="outlined"
+                            size="small"
+                            style={{ marginRight: 10 }}
+                        />
+                        <IconButton onClick={handleSearch}>
+                            <SearchIcon />
+                        </IconButton>
+                    </div>
                     <IconButton component={Link} to="/cart" style={{ color: 'inherit' }}>
                         <Badge badgeContent={cartItems.length} color="error">
                             Cart
@@ -46,7 +77,7 @@ const Books = () => {
                     </Link>
                 </Button>
                 <Grid container spacing={2} justifyContent="center">
-                    {books.map((book) => (
+                    {filteredBooks.map((book) => (
                         <Grid item key={book.id} xs={12} sm={6} md={4}>
                             <Card style={{ marginBottom: 16, backgroundColor: "gray", maxWidth: 450 }}>
                                 <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -75,11 +106,11 @@ const Books = () => {
                         </Grid>
                     ))}
                 </Grid>
-
             </div>
-        </div >
+        </div>
     );
 };
 
 export default Books;
+
 
