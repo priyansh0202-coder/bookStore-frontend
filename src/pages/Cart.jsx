@@ -44,7 +44,7 @@ const Cart = () => {
                 </Toolbar>
             </AppBar>
             <div style={{ maxWidth: 800, width: '100%', padding: 16, color: "white" }}>
-                <h1>Your Cart</h1>
+                <h1 style={{ marginLeft: 250, padding: 5 }}>Your Cart</h1>
                 {cartItems.length === 0 ? (
                     <Typography variant="body1">
                         Your cart is empty
@@ -64,7 +64,7 @@ const Cart = () => {
                                         </Typography>
                                         {item.price !== undefined && !isNaN(item.price) && (
                                             <Typography variant='body1' color='primary' style={{ color: "black" }}>
-                                                Price: ${item.price.toFixed(2)}
+                                                Price: {item.price.toFixed(2)}
                                             </Typography>
                                         )}
                                         <Button size="small" variant='contained' style={{ marginTop: 5 }} onClick={() => removeItem(index)}>Remove</Button>
@@ -74,15 +74,10 @@ const Cart = () => {
                         ))}
                     </Grid>
                 )}
-                <Typography variant='h6' component='div' style={{ marginTop: 16 }}>
-                    Total Price: ${calculateTotalPrice()}
+                <Typography variant='h6' component='div' style={{ marginTop: 20, marginLeft: 300, }}>
+                    Total Price: {calculateTotalPrice()}
                 </Typography>
-                <Button variant='contained' color='primary' style={{ marginTop: 16 }} onClick={(item) => dispatch(addtoCart({
-                    cover: item.cover,
-                    title: item.title,
-                    desc: item.desc,
-                    price: item.price,
-                }))}>
+                <Button variant='contained' color='warning' style={{ marginTop: 20, marginLeft: 330 }} >
                     <Link to='/checkout' style={{ textDecoration: 'none', color: 'inherit' }}>
                         Checkout
                     </Link>
@@ -93,5 +88,7 @@ const Cart = () => {
 };
 
 export default Cart;
+
+
 
 

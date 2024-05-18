@@ -48,7 +48,7 @@ const Books = () => {
                             Books Store
                         </Typography>
                     </Link>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', backgroundColor: "white", height: 35, borderRadius: 3 }}>
                         <TextField
                             type='search'
                             value={searchVal}
@@ -58,7 +58,7 @@ const Books = () => {
                             size="small"
                             style={{ marginRight: 10 }}
                         />
-                        <IconButton onClick={handleSearch}>
+                        <IconButton onClick={handleSearch} style={{ padding: 7 }}>
                             <SearchIcon />
                         </IconButton>
                     </div>
@@ -107,7 +107,7 @@ const Books = () => {
                     ))}
                 </Grid>
             </div>
-        </div>
+        </div >
     );
 };
 

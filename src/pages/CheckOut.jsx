@@ -79,9 +79,9 @@ const CheckOut = () => {
                                     <Typography variant='body2' color='textSecondary' style={{ marginBottom: 8 }}>
                                         {item.desc}
                                     </Typography>
-                                    {item.price !== undefined && !isNaN(item.price) && (
+                                    {item.price !== undefined && (
                                         <Typography variant='body1' style={{ marginTop: 8 }}>
-                                            Price: ${item.price.toFixed(2)}
+                                            Price: {item.price.toFixed(2)}
                                         </Typography>
                                     )}
                                 </CardContent>
@@ -95,4 +95,3 @@ const CheckOut = () => {
 };
 
 export default CheckOut;
-
