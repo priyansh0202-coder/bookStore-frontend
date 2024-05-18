@@ -62,9 +62,11 @@ const Cart = () => {
                                         <Typography variant='body2' color='text.secondary' style={{ marginBottom: 8, color: "black" }}>
                                             {item.desc}
                                         </Typography>
-                                        <Typography variant='body1' color='primary' style={{ color: "black" }}>
-                                            Price: ${item.price.toFixed(2)}
-                                        </Typography>
+                                        {item.price !== undefined && !isNaN(item.price) && (
+                                            <Typography variant='body1' color='primary' style={{ color: "black" }}>
+                                                Price: ${item.price.toFixed(2)}
+                                            </Typography>
+                                        )}
                                         <Button size="small" variant='contained' style={{ marginTop: 5 }} onClick={() => removeItem(index)}>Remove</Button>
                                     </CardContent>
                                 </Card>
@@ -91,6 +93,5 @@ const Cart = () => {
 };
 
 export default Cart;
-
 
 
