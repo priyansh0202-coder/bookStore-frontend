@@ -16,7 +16,7 @@ const Books = () => {
     useEffect(() => {
         const fetchAllBooks = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/book');
+                const response = await axios.get('https://book-app-backend-imwc.onrender.com');
                 setBooks(response.data);
                 setFilteredBooks(response.data);
             } catch (error) {
