@@ -31,7 +31,7 @@ const Add = () => {
         formData.append("price", values.price)
         formData.append("cover", values.cover);
 
-        const response = await axios.post("http://localhost:8000/book", formData, {
+        const response = await axios.post("https://book-app-backend-imwc.onrender.com", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
