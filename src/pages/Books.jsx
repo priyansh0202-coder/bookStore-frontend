@@ -26,7 +26,10 @@ const Books = () => {
         fetchAllBooks();
     }, []);
 
+    const [searchVal, setSearchVal] = useState("");
+
     const handleSearch = () => {
+        console.log("without memo")
         if (searchVal === "") {
             setFilteredBooks(books);
         } else {
@@ -37,7 +40,6 @@ const Books = () => {
         }
     };
 
-    const [searchVal, setSearchVal] = useState("");
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: " black" }}>
@@ -56,7 +58,7 @@ const Books = () => {
                             placeholder="Search books..."
                             variant="outlined"
                             size="small"
-                            style={{ marginRight: 10 }}
+                            style={{ marginRight: 8 }}
                         />
                         <IconButton onClick={handleSearch} style={{ padding: 7 }}>
                             <SearchIcon />
@@ -79,7 +81,7 @@ const Books = () => {
                 <Grid container spacing={2} justifyContent="center">
                     {filteredBooks.map((book) => (
                         <Grid item key={book.id} xs={12} sm={6} md={4}>
-                            <Card style={{ marginBottom: 16, backgroundColor: "gray", maxWidth: 450 }}>
+                            <Card style={{ marginBottom: 16, backgroundColor: "white", maxWidth: 450 }}>
                                 <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     {book.cover && (
                                         <img src={`/upload/${book.cover}`} alt='Book Cover' style={{ height: 200, objectFit: 'cover', marginBottom: 16 }} />

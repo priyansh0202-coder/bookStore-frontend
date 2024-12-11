@@ -23,7 +23,7 @@ const Add = () => {
     initialValues: initialValues,
     validationSchema: bookSchema,
 
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         const formData = new FormData();
         formData.append("title", values.title)
@@ -36,11 +36,14 @@ const Add = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("res", response)
-        console.log("form", formData)
-        navigate("/")
+        // console.log("res", response)
+        // console.log("form", formData)
+
+        navigate("/", { replace: true });
       } catch (error) {
         console.log("error", error);
+      } finally {
+        resetForm();
       }
     },
   });
