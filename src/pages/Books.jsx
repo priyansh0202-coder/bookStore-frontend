@@ -79,34 +79,41 @@ const Books = () => {
                     </Link>
                 </Button>
                 <Grid container spacing={2} justifyContent="center">
-                    {filteredBooks.map((book) => (
-                        <Grid item key={book.id} xs={12} sm={6} md={4}>
-                            <Card style={{ marginBottom: 16, backgroundColor: "white", maxWidth: 450 }}>
-                                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    {book.cover && (
-                                        <img src={`/upload/${book.cover}`} alt='Book Cover' style={{ height: 200, objectFit: 'cover', marginBottom: 16 }} />
-                                    )}
-                                    <Typography variant='h5' component='div' style={{ textAlign: 'center', marginBottom: 8, fontStyle: "oblique", fontSize: "25px" }}>
-                                        {book.title}
-                                    </Typography>
-                                    <Typography variant='body2' color='text.secondary' style={{ textAlign: 'center', marginBottom: 8, color: "black", fontStyle: "italic", fontSize: "20px" }}>
-                                        {book.desc}
-                                    </Typography>
-                                    <Typography variant='body1' color='primary' style={{ textAlign: 'center', marginBottom: 8, color: "black" }}>
-                                        Price: {book.price}
-                                    </Typography>
-                                    <Button variant='contained' color='primary' onClick={() => dispatch(addtoCart({
-                                        cover: book.cover,
-                                        title: book.title,
-                                        desc: book.desc,
-                                        price: book.price,
-                                    }))}>
-                                        Add to cart
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
+                    {Array.isArray(filteredBooks) && filteredBooks.length > 0 ? (
+    filteredBooks.map((book) => (
+        <Grid item key={book.id} xs={12} sm={6} md={4}>
+            <Card style={{ marginBottom: 16, backgroundColor: "white", maxWidth: 450 }}>
+                <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    {book.cover && (
+                        <img src={`/upload/${book.cover}`} alt='Book Cover' style={{ height: 200, objectFit: 'cover', marginBottom: 16 }} />
+                    )}
+                    <Typography variant='h5' component='div' style={{ textAlign: 'center', marginBottom: 8, fontStyle: "oblique", fontSize: "25px" }}>
+                        {book.title}
+                    </Typography>
+                    <Typography variant='body2' color='text.secondary' style={{ textAlign: 'center', marginBottom: 8, color: "black", fontStyle: "italic", fontSize: "20px" }}>
+                        {book.desc}
+                    </Typography>
+                    <Typography variant='body1' color='primary' style={{ textAlign: 'center', marginBottom: 8, color: "black" }}>
+                        Price: {book.price}
+                    </Typography>
+                    <Button variant='contained' color='primary' onClick={() => dispatch(addtoCart({
+                        cover: book.cover,
+                        title: book.title,
+                        desc: book.desc,
+                        price: book.price,
+                    }))}>
+                        Add to cart
+                    </Button>
+                </CardContent>
+            </Card>
+        </Grid>
+    ))
+) : (
+    <Typography variant="h6" color="error" style={{ textAlign: 'center', marginTop: 16 }}>
+        No books found.
+    </Typography>
+)}
+
                 </Grid>
             </div>
         </div >
